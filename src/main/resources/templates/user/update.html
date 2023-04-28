@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="/fragments/head :: head"></head>
+
+<body>
+
+<div class="dashboard-main-wrapper">
+
+    <div th:replace="/fragments/header :: header"></div>
+
+    <div th:replace="/fragments/left-sidebar :: left-sidebar"></div>
+
+    <div class="dashboard-wrapper">
+
+        <div class="dashboard-ecommerce">
+
+            <div class="container-fluid dashboard-content">
+
+                <div class="ecommerce-widget">
+
+                    <div class="row">
+
+                        <div class="col-lg-6 col-md-12">
+
+                            <section class="panel panel-transparent">
+                                <header class="panel-heading">
+                                    <h2 class="panel-title">User Create</h2>
+                                </header>
+
+                                <div class="panel-body">
+
+                                    <!-- ------------------------FORM START----------------------------- -->
+                                    <form method="post" th:action="@{/user/update}" th:object="${user}">
+                                        <div class="row">
+                                            <div class="col-sm-6 col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-form-label" for="firstname">First Name</label>
+                                                    <input class="form-control" id="firstname" placeholder="first name"
+                                                           th:field="*{firstName}" type="text">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6 col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-form-label" for="lastname">Last Name</label>
+                                                    <input class="form-control" id="lastname" placeholder="last name"
+                                                           th:field="*{lastName}" type="text">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-6 col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-form-label" for="emailaddress">Email
+                                                        Address</label>
+                                                    <input class="form-control" id="emailaddress" placeholder="email address"
+                                                           th:field="*{userName}" type="text">>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6 col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-form-label" for="phonenumber">Phone Number</label>
+                                                    <input class="form-control" id="phonenumber" placeholder="phone number"
+                                                           th:field="*{phone}" type="tel">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-6 col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-form-label" for="password">Password</label>
+                                                    <input class="form-control" id="password" placeholder="password"
+                                                           th:field="*{passWord}" type="password">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6 col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-form-label" for="repassword">Confirm
+                                                        Password</label>
+                                                    <input class="form-control" id="repassword"
+                                                           placeholder="confirm your password" th:field="*{passWord}"
+                                                           type="password">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-6 col-md-6">
+                                                <div class="form-group">
+                                                    <label>Gender</label><br>
+                                                    <label class="custom-control custom-radio custom-control-inline">
+                                                        <input class="custom-control-input" name="radio-inline" th:field="*{gender}"
+                                                               th:value="MALE" type="radio"><span
+                                                            class="custom-control-label">Male</span>
+                                                    </label>
+                                                    <label class="custom-control custom-radio custom-control-inline">
+                                                        <input class="custom-control-input" name="radio-inline" th:field="*{gender}"
+                                                               th:value="FEMALE" type="radio"><span
+                                                            class="custom-control-label">Female</span>
+                                                    </label>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6 col-md-6">
+                                                <div class="form-group">
+                                                    <label>Choose a Role</label>
+                                                    <select class="custom-select" th:field="*{role}">
+                                                        <option th:each="role : ${roles}" th:text="${role.description}"
+                                                                th:value="${role.id}"></option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-6 col-md-6 col-lg-12">
+                                                <div class="float-right">
+                                                    <button class="btn btn-success" type="submit">Save</button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                    <!-- ------------------------FORM END----------------------------- -->
+
+                                </div>
+
+                            </section>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ------------------------TABLE START----------------------------- -->
+
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="col-md-12">
+                            <section class="panel">
+                                <header class="panel-heading">
+                                    <h2 class="panel-title">User List</h2>
+                                </header>
+                                <div class="panel-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Email(username)</th>
+                                                <th scope="col">Gender</th>
+                                                <th scope="col">Phone</th>
+                                                <th scope="col">Role</th>
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                            </thead>
+
+                                            <tbody>
+
+                                            <tr th:each="user : ${users}">
+                                                <td th:text="${user.firstName + ' ' + user.lastName}"></td>
+                                                <td th:text="${user.userName}"></td>
+                                                <td th:text="${user.gender.value}"></td>
+                                                <td th:text="${user.phone}"></td>
+                                                <td th:text="${user.role.description}"></td>
+                                                <td class="actions">
+                                                    <a th:href="@{/user/update/{id}(id=${user.userName})}">
+                                                        <button class="btn btn-warning btn-sm" type="button">Update
+                                                        </button>
+                                                    </a>
+                                                    <a class="delete-row"
+                                                       th:href="@{/user/delete/{id}(id=${user.userName})}">
+                                                        <button class="btn btn-secondary btn-sm" type="button">Delete
+                                                        </button>
+                                                    </a>
+                                                </td>
+                                            </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ------------------------TABLE END----------------------------- -->
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div th:replace="/fragments/footer :: footer"></div>
+
+</div>
+
+<div th:replace="/fragments/javascript :: js"></div>
+
+</body>
+
+</html>
