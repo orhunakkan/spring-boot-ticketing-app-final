@@ -7,6 +7,7 @@ import jakarta.persistence.MappedSuperclass;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Where;
 
 
 import java.time.LocalDateTime;
@@ -15,15 +16,16 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Data
 @MappedSuperclass
+@Where(clause = "is_deleted = false")
 public class BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long id;
     private LocalDateTime insertDateTime;
     private Long insertUserId;
     private LocalDateTime lastUpdateDateTime;
     private Long lastUpdateUserId;
+    private Boolean isDeleted = false;
 
 }
