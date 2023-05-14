@@ -11,7 +11,7 @@ import java.time.LocalDate;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@Table(name = "projects")
+@Table(name = "tasks")
 @NoArgsConstructor
 @Data
 @Where(clause = "is_deleted = false")

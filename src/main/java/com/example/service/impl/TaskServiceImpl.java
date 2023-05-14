@@ -8,6 +8,7 @@ import com.example.repository.TaskRepository;
 import com.example.service.TaskService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,6 +36,7 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public void save(TaskDTO taskDTO) {
         taskDTO.setTaskStatus(Status.OPEN);
+        taskDTO.setAssignedDate(LocalDate.now());
         Task task = taskMapper.convertToEntity(taskDTO);
         taskRepository.save(task);
 
