@@ -37,5 +37,4 @@ public class Project extends BaseEntity{
     private Status projectStatus;
 
 
-
 }
